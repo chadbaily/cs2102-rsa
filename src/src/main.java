@@ -27,8 +27,8 @@ expected to add your own code to those areas.
 public class RSA {
 
     public static void main(String[] args) {
-		/*
-		 * Part 1 - prompt user for a string input of ASCII characters. Encode
+        /*
+         * Part 1 - prompt user for a string input of ASCII characters. Encode
 		 * the string into a list of integers.
 		 *
 		 * This section has been completed for you.
@@ -71,7 +71,7 @@ public class RSA {
         System.out.println("-----------------------------------------");
 
 		/*
-		 * Part 3 - Next, we calculate the public key exponent, called E. E is
+         * Part 3 - Next, we calculate the public key exponent, called E. E is
 		 * chosen to be an integer which is relatively prime to another integer
 		 * called the totient, usually represented by phi. In this step,
 		 * calculate phi, which is equal to (P-1)(Q-1). The create a public key
@@ -83,10 +83,16 @@ public class RSA {
 
         // calculate phi here
         ////////////////////////////////////////////////
-
+        long phi = (P - 1) * (Q - 1);
         // write an algorithm to find E which is relatively prime to phi here.
         // in other words find E such that gcd(phi,E)=1, and E<phi.
-
+        long E = 0;
+        while (true) {
+            if (gcd(E, phi) == 1 && E < phi) {
+                break;
+            } else
+                E++;
+        }
         ///////////////////////////////////////////////
 
         System.out.println();
@@ -97,7 +103,7 @@ public class RSA {
         System.out.println("-----------------------------------------");
 
 		/*
-		 * Part 4 - Find the multiplicative inverse of E mod (P-1)(Q-1). In this
+         * Part 4 - Find the multiplicative inverse of E mod (P-1)(Q-1). In this
 		 * step, we are looking for D such that E*D = 1 mod phi. Remember, phi
 		 * is called the totient and is equal to (P-1)(Q-1). To do this, we need
 		 * to find what are called the Bezout coefficients of E and phi. The
@@ -153,7 +159,7 @@ public class RSA {
         System.out.println("-----------------------------------------");
 
 		/*
-		 * Part 5 - Encrypt the ASCII-coded message using the public key. This
+         * Part 5 - Encrypt the ASCII-coded message using the public key. This
 		 * is accomplished by taking the ASCII-coded list and raising each
 		 * component to power of the public key exponent, and dividing modulus
 		 * PQ. One hint to note: taking the ASCII code and raising to the power
@@ -177,7 +183,7 @@ public class RSA {
         System.out.println("-----------------------------------------");
 
 		/*
-		 * Part 6 - To decrypt the encrypted code, one raises each of the
+         * Part 6 - To decrypt the encrypted code, one raises each of the
 		 * elements in the encrypted string to the private key exponent, and
 		 * dividing modulus PQ.
 		 *
@@ -197,7 +203,7 @@ public class RSA {
         System.out.println("-----------------------------------------");
 
 		/*
-		 * Part 7 - The decrypted message should now be a list of integers which
+         * Part 7 - The decrypted message should now be a list of integers which
 		 * are the ASCII code of the of the original message. In other words,
 		 * your decrypted list should be the exact same list as the
 		 * ASCIIstringEncoded list (except you will notice they are now long
